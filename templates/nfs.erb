@@ -1,0 +1,132 @@
+#
+# Note: For new values to take effect the nfs-config service
+# has to be restarted with the following command:
+#    systemctl restart nfs-config
+#
+# Optional arguments passed to in-kernel lockd
+<% if @lockdarg != "" -%>
+LOCKDARG="<%= @lockdarg %>"
+<% else -%>
+#LOCKDARG=
+<% end -%>
+# TCP port rpc.lockd should listen on.
+<% if @lockd_tcpport != "" -%>
+LOCKD_TCPPORT=<%= @lockd_tcpport %>
+<% else -%>
+#LOCKD_TCPPORT=32803
+<% end -%>
+# UDP port rpc.lockd should listen on.
+<% if @lockd_udpport != "" -%>
+LOCKD_UDPPORT=<%= @lockd_udpport %>
+<% else -%>
+#LOCKD_UDPPORT=32769
+<% end -%>
+#
+# Optional arguments passed to rpc.nfsd. See rpc.nfsd(8)
+<% if @rpcnfsdargs != "" -%>
+RPCNFSDARGS="<%= @rpcnfsdargs %>"
+<% else -%>
+RPCNFSDARGS=""
+<% end -%>
+# Number of nfs server processes to be started.
+# The default is 8. 
+<% if @rpcnfsdcount != "" -%>
+RPCNFSDCOUNT=<%= @rpcnfsdcount %>
+<% else -%>
+#RPCNFSDCOUNT=16
+<% end -%>
+#
+# Set V4 grace period in seconds
+<% if @nfsd_v4_grace != "" -%>
+NFSD_V4_GRACE=<%= @nfsd_v4_grace %>
+<% else -%>
+#NFSD_V4_GRACE=90
+<% end -%>
+#
+# Set V4 lease period in seconds
+<% if @nfsd_v4_lease != "" -%>
+NFSD_V4_LEASE=<%= @nfsd_v4_lease %>
+<% else -%>
+#NFSD_V4_LEASE=90
+<% end -%>
+#
+# Optional arguments passed to rpc.mountd. See rpc.mountd(8)
+<% if @rpcmountdopts != "" -%>
+RPCMOUNTDOPTS="<%= @rpcmountdopts %>"
+<% else -%>
+RPCMOUNTDOPTS=""
+<% end -%>
+# Port rpc.mountd should listen on.
+<% if @mountd_port != "" -%>
+MOUNTD_PORT=<%= @mountd_port %>
+<% else -%>
+#MOUNTD_PORT=892
+<% end -%>
+#
+# Optional arguments passed to rpc.statd. See rpc.statd(8)
+<% if @statdarg != "" -%>
+STATDARG="<%= @statdarg %>"
+<% else -%>
+STATDARG=""
+<% end -%>
+# Port rpc.statd should listen on.
+<% if @statd_port != "" -%>
+STATD_PORT=<%= @statd_port %>
+<% else -%>
+#STATD_PORT=662
+<% end -%>
+# Outgoing port statd should used. The default is port
+# is random
+<% if @statd_outgoing_port != "" -%>
+STATD_OUTGOING_PORT=<%= @statd_outgoing_port %>
+<% else -%>
+#STATD_OUTGOING_PORT=2020
+<% end -%>
+# Specify callout program
+<% if @statd_ha_callout != "" -%>
+STATD_HA_CALLOUT="<%= @statd_ha_callout %>"
+<% else -%>
+#STATD_HA_CALLOUT="/usr/local/bin/foo"
+<% end -%>
+#
+#
+# Optional arguments passed to sm-notify. See sm-notify(8)
+<% if @smnotifyargs != "" -%>
+SMNOTIFYARGS="<%= @smnotifyargs %>"
+<% else -%>
+SMNOTIFYARGS=""
+<% end -%>
+#
+# Optional arguments passed to rpc.idmapd. See rpc.idmapd(8)
+<% if @rpcidmapdargs != "" -%>
+RPCIDMAPDARGS="<%= @rpcidmapdargs %>"
+<% else -%>
+RPCIDMAPDARGS=""
+<% end -%>
+#
+# Optional arguments passed to rpc.gssd. See rpc.gssd(8)
+# Note: The rpc-gssd service will not start unless the 
+#       file /etc/krb5.keytab exists. If an alternate
+#       keytab is needed, that separate keytab file
+#       location may be defined in the rpc-gssd.service's
+#       systemd unit file under the ConditionPathExists
+#       parameter
+<% if @rpcgssdargs != "" -%>
+RPCGSSDARGS="<%= @rpcgssdargs %>"
+<% else -%>
+RPCGSSDARGS=""
+<% end -%>
+#
+# Enable usage of gssproxy. See gssproxy-mech(8).
+<% if @gss_use_proxy != "" -%>
+GSS_USE_PROXY="<%= @gss_use_proxy %>"
+<% else -%>
+GSS_USE_PROXY="yes"
+<% end -%>
+#
+# Optional arguments passed to blkmapd. See blkmapd(8)
+<% if @blkmapdargs != "" -%>
+BLKMAPDARGS="<%= @blkmapdargs %>"
+<% else -%>
+BLKMAPDARGS=""
+<% end -%>

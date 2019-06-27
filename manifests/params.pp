@@ -313,4 +313,25 @@ class nfs::params {
       notice("\"${module_name}\" provides no service parameters for OS family \"${::osfamily}\"")
     }
   }
+
+  # sysconfig
+  $sysconfig           = false
+  $lockdarg            = ""
+  $lockd_tcpport       = ""
+  $lockd_udpport       = ""
+  $rpcnfsdargs         = ""
+  $rpcnfsdcount        = ""
+  $nfsd_v4_grace       = ""
+  $nfsd_v4_lease       = ""
+  $rpcmountdopts       = ""
+  $mountd_port         = ""
+  $statdarg            = ""
+  $statd_port          = ""
+  $statd_outgoing_port = ""
+  $statd_ha_callout    = ""
+  $smnotifyargs        = ""
+  $rpcidmapdargs       = ""
+  $rpcgssdargs         = ""
+  $gss_use_proxy       = ""
+  $blkmapdargs         = ""
 }

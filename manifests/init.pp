@@ -270,6 +270,25 @@ class nfs(
   Optional[Stdlib::Absolutepath] $client_rpcbind_config                               = $::nfs::params::client_rpcbind_config,
   Optional[String] $client_rpcbind_optname                                            = $::nfs::params::client_rpcbind_optname,
   Optional[String] $client_rpcbind_opts                                               = undef,
+  $sysconfig                                                                          = $::nfs::params::sysconfig,
+  $lockdarg                                                                           = $::nfs::params::lockdarg,
+  $lockd_tcpport                                                                      = $::nfs::params::lockd_tcpport,
+  $lockd_udpport                                                                      = $::nfs::params::lockd_udpport,
+  $rpcnfsdargs                                                                        = $::nfs::params::rpcnfsdargs,
+  $rpcnfsdcount                                                                       = $::nfs::params::rpcnfsdcount,
+  $nfsd_v4_grace                                                                      = $::nfs::params::nfsd_v4_grace,
+  $nfsd_v4_lease                                                                      = $::nfs::params::nfsd_v4_lease,
+  $rpcmountdopts                                                                      = $::nfs::params::rpcmountdopts,
+  $mountd_port                                                                        = $::nfs::params::mountd_port,
+  $statdarg                                                                           = $::nfs::params::statdarg,
+  $statd_port                                                                         = $::nfs::params::statd_port,
+  $statd_outgoing_port                                                                = $::nfs::params::statd_outgoing_port,
+  $statd_ha_callout                                                                   = $::nfs::params::statd_ha_callout,
+  $smnotifyargs                                                                       = $::nfs::params::smnotifyargs,
+  $rpcidmapdargs                                                                      = $::nfs::params::rpcidmapdargs,
+  $rpcgssdargs                                                                        = $::nfs::params::rpcgssdargs,
+  $gss_use_proxy                                                                      = $::nfs::params::gss_use_proxy,
+  $blkmapdargs                                                                        = $::nfs::params::blkmapdargs,
 ) inherits nfs::params {
 
   if $server_enabled {
@@ -293,6 +312,29 @@ class nfs(
     $effective_client_services = $client_services
     $effective_client_packages = $client_packages
 
+  }
+
+  if $sysconfig {
+    class { 'nfs::config':
+      lockdarg            ==> $lockdarg,
+      lockd_tcpport       ==> $lockd_tcpport,
+      lockd_udpport       ==> $lockd_udpport,
+      rpcnfsdargs         ==> $rpcnfsdargs,
+      rpcnfsdcount        ==> $rpcnfsdcount,
+      nfsd_v4_grace       ==> $nfsd_v4_grace,
+      nfsd_v4_lease       ==> $nfsd_v4_lease,
+      rpcmountdopts       ==> $rpcmountdopts,
+      mountd_port         ==> $mountd_port,
+      statdarg            ==> $statdarg,
+      statd_port          ==> $statd_port,
+      statd_outgoing_port ==> $statd_outgoing_port,
+      statd_ha_callout    ==> $statd_ha_callout,
+      smnotifyargs        ==> $smnotifyargs,
+      rpcidmapdargs       ==> $rpcidmapdargs,
+      rpcgssdargs         ==> $rpcgssdargs,
+      gss_use_proxy       ==> $gss_use_proxy,
+      blkmapdargs         ==> $blkmapdargs,
+    }
   }
 
   if $server_enabled {
