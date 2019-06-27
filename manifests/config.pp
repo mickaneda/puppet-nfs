@@ -1,4 +1,6 @@
 class nfs::config (
+  $manage_server_service = true,
+  $server_service_name = $::nfs::params::server_service_name,
   $lockdarg            = $::nfs::params::lockdarg,
   $lockd_tcpport       = $::nfs::params::lockd_tcpport,
   $lockd_udpport       = $::nfs::params::lockd_udpport,
@@ -18,8 +20,14 @@ class nfs::config (
   $gss_use_proxy       = $::nfs::params::gss_use_proxy,
   $blkmapdargs         = $::nfs::params::blkmapdargs,
 ) inherits nfs::params {
+  if manage_server_service {
+    $notify_services = Service[server_service_name]
+  } else {
+    $notify_services = undef
+  }
   file { '/etc/sysconfig/nfs':
     ensure  => present,
     content => template("${module_name}/nfs.erb"),
+    notify => $notify_services,
   }
 }

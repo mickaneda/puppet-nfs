@@ -316,6 +316,8 @@ class nfs(
 
   if $sysconfig {
     class { 'nfs::config':
+      manage_server_service ==> $manage_server_service,
+      server_service_name ==> $server_service_name,
       lockdarg            ==> $lockdarg,
       lockd_tcpport       ==> $lockd_tcpport,
       lockd_udpport       ==> $lockd_udpport,
