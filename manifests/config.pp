@@ -21,7 +21,7 @@ class nfs::config (
   $blkmapdargs         = $::nfs::params::blkmapdargs,
 ) inherits nfs::params {
   if manage_server_service {
-    $notify_services = Service[server_service_name]
+    $notify_services = Service[$server_service_name]
   } else {
     $notify_services = undef
   }
